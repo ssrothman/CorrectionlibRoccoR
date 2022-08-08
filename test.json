@@ -1,0 +1,84 @@
+{
+    "schema_version" : 2,
+    "corrections": [
+        {
+            "name": "test",
+            "description": "test_description",
+            "version":1,
+            "inputs": [
+                {
+                    "name" : "year",
+                    "type" : "string",
+                    "description" : "year/scenario: example 2016preVFP, 2017 etc"
+                },
+                {
+                    "name" : "pt",
+                    "type" : "real",
+                    "description" : "muon pt"
+                }
+            ],
+            "output" : {
+                "name" : "weight",
+                "type" : "real",
+                "description" : "Output muon pt scale factor"
+            },
+            "generic_formulas" :[
+                {
+                    "nodetype" : "formula",
+                    "expression" : "x*x + [0]",
+                    "parser" : "TFormula",
+                    "variables" : ["pt"]
+                }
+            ],
+            "data" : {
+                "nodetype" : "category",
+                "input" : "year",
+                "content" : [
+                    {
+                        "key" : "2017_UL",
+                        "value" : {
+                            "nodetype" : "binning",
+                            "input" : "pt",
+                            "edges" : [
+                                0.0,
+                                10.0,
+                                20.0,
+                                50.0,
+                                100.0,
+                                Infinity
+                            ],
+                            "content" : [
+                                {
+                                    "nodetype" : "formularef",
+                                    "index" : 0,
+                                    "parameters" : [3]
+                                },
+                                {
+                                    "nodetype" : "formularef",
+                                    "index" : 0,
+                                    "parameters" : [2]
+                                },
+                                {
+                                    "nodetype" : "formularef",
+                                    "index" : 0,
+                                    "parameters" : [1]
+                                },
+                                {
+                                    "nodetype" : "formularef",
+                                    "index" : 0,
+                                    "parameters" : [0]
+                                },
+                                {
+                                    "nodetype" : "formularef",
+                                    "index" : 0,
+                                    "parameters" : [-1]
+                                }
+                            ],
+                            "flow" : "error"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

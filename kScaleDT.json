@@ -1,0 +1,105 @@
+{
+    "schema_version" : 2,
+    "corrections": [
+        {
+            "name": "kScaleDT",
+            "description": "kScaleDT(Q, pt, eta, phi, s, m)",
+            "version":1,
+            "inputs": [
+                {
+                    "name" : "Q",
+                    "type" : "int",
+                    "description" : "muon charge"
+                },
+                {
+                    "name" : "pt",
+                    "type" : "real",
+                    "description" : "muon pt"
+                },
+                {
+                    "name" : "eta",
+                    "type" : "real",
+                    "description" : "muon eta"
+                },
+                {
+                    "name" : "phi",
+                    "type" : "real",
+                    "description" : "muon phi"
+                },
+                {
+                    "name" : "s",
+                    "type" : "int",
+                    "description" : "error set"
+                },
+                {
+                    "name" : "m",
+                    "type" : "int",
+                    "description" : "error member"
+                }
+
+            ],
+            "output" : {
+                "name" : "weight",
+                "type" : "real",
+                "description" : "Output muon pt scale factor"
+            },
+            "generic_formulas" :[
+                {
+                    "nodetype" : "formula",
+                    "expression" : "1.0/([0] + Q*[1]*pt)",
+                    "parser" : "TFormula",
+                    "variables" : ["Q","pt"]
+                }
+            ],
+            "data" : {
+                "nodetype" : "category",
+                "input" : "year",
+                "content" : [
+                    {
+                        "key" : "2017_UL",
+                        "value" : {
+                            "nodetype" : "binning",
+                            "input" : "pt",
+                            "edges" : [
+                                0.0,
+                                10.0,
+                                20.0,
+                                50.0,
+                                100.0,
+                                Infinity
+                            ],
+                            "content" : [
+                                {
+                                    "nodetype" : "formularef",
+                                    "index" : 0,
+                                    "parameters" : [3]
+                                },
+                                {
+                                    "nodetype" : "formularef",
+                                    "index" : 0,
+                                    "parameters" : [2]
+                                },
+                                {
+                                    "nodetype" : "formularef",
+                                    "index" : 0,
+                                    "parameters" : [1]
+                                },
+                                {
+                                    "nodetype" : "formularef",
+                                    "index" : 0,
+                                    "parameters" : [0]
+                                },
+                                {
+                                    "nodetype" : "formularef",
+                                    "index" : 0,
+                                    "parameters" : [-1]
+                                }
+                            ],
+                            "flow" : "error"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
