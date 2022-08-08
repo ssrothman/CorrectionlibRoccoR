@@ -57,5 +57,8 @@ testPT = np.asarray([50.0, 50.0])
 testETA = testQ
 testPHI = testQ
 
+print("Inputting single values at a time works:")
 print(cset['kScaleDT'].evaluate(testQ[0], testPT[0], testETA[0], testPHI[0]))
+print()
+print("Inputting arrays of values at a time FAILS:")
 print(cset['kScaleDT'].evaluate(testQ, testPT, testETA, testPHI))
